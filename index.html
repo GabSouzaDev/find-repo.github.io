@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Repositórios</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+
+        <form class="form-request" id="form-request">
+            <input type="text" name="consulta-api" id="consulta-api" placeholder="digite algo a ser buscado" required>
+            <input type="submit" value="Buscar" id="busca-api">
+        </form>
+
+        <section class="form-response">
+
+            <label class="show-message" id="show-message" for="consulta-api">Busque por um repositório</label>
+
+            <div class="card hide" id="card">
+        
+                <div class="author-section">
+                    <div class="name-author" id="name-author"></div>
+                    <div class="photo-author" >
+                        <img src="" alt="" id="photo-author">
+                    </div>
+                </div>
+                
+                <div class="repo-section">
+                    <div class="repo-name" id="repo-name"></div>
+                    <div class="description-repo" id="repo-description"></div>
+                    <div class="language-repo" id="repo-language"></div>
+                    <div class="stars-repo" id="repo-stars"></div>
+                    <div class="link-repo">
+                        <a href="" target="_blank"  id="repo-link">Acessar repositório</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card hide" id="card">
+        
+                
+            </div>
+            
+        </section>
+
+        
+
+        <!-- <section class="form-response">
+            
+            <div class="card">    
+                <div class="author-section">
+                    <div class="name-author">Betinha</div>
+                    <div class="photo-author">
+                        <img src="https://cdn.pixabay.com/photo/2024/01/15/16/57/avatar-8510529_1280.jpg" alt="">
+                    </div>
+                </div>
+                
+                <div class="repo-section">
+                    <div class="repo-name">Videozinho </div>
+                    <div class="language-repo">PT-BR</div>
+                    <div class="stars-repo">1000 ⭐</div>
+                    <div class="link-repo">
+                        <a href="http://github.com" target="_blank">Meu repositório</a>
+                    </div>
+                </div>
+            </div>
+            
+        </section> -->
+
+
+
+        <script src="assets/script.js"></script>
+
+    
+</body>
+</html>
