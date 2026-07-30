@@ -3,16 +3,9 @@ let fieldFormRequest = document.querySelector("#consulta-api")
 let buttonFormRequest = document.querySelector("#busca-api")
 let alertMessage = document.querySelector("#show-message") 
 let results = document.querySelector("#results")
-// let card = document.querySelector("#card")
-// let authorName = document.querySelector("#name-author")
-// let authorPhoto = document.querySelector("#photo-author")
-// let repoName = document.querySelector("#repo-name")
-// let repoDesc = document.querySelector("#repo-description")
-// let repoStars = document.querySelector("#repo-stars")
-// let repoLink = document.querySelector("#repo-link")
-// let repoLanguage = document.querySelector("#repo-language")
 
 
+//async simula código síncrono
 async function sendRequest(text) {
     let sanitizedText = text.trim()
     clearInput()
@@ -21,10 +14,12 @@ async function sendRequest(text) {
     alertMessage.textContent = "Buscando repositórios..."
     results.innerHTML = ""
 
-    try {
+    //await - aguarda o código finalizar para prosseguir.
+    try { 
         let response = await fetch(`https://api.github.com/search/repositories?q=${sanitizedText}&sort=stars&per_page=10`)
         let data = await response.json()
 
+        //bad path - primeiro verifica os erros e depois retorna o happy path.
         if(!response.ok) {
             throw new Error("Erro na API")
         }
@@ -40,6 +35,7 @@ async function sendRequest(text) {
                 let card = document.createElement("div") //cria o elemento card.
                 card.className = "card" //card recebe as devidas estilizações.
 
+                //insere os elementos no card.
                 card.innerHTML = 
                     `
                         <div class="author-section">
@@ -84,4 +80,3 @@ formRequest.addEventListener('submit', (event) => {
 
 })
 
-renderCard()

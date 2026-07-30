@@ -4,6 +4,10 @@
 
 }
 
+:root {
+    color-scheme: light dark;
+}
+
 
 .hide {
     visibility: hidden;
@@ -22,6 +26,7 @@ body {
     align-items: center;
     margin: 0 auto;
     background-color: #CCC;
+    color: #000
 }
 
 .form-request, .form-response {
@@ -163,4 +168,24 @@ flex-direction: column;
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #222;
+        color: #eee;
+    }
+    .card,
+    .repo-section {
+        background-color: #333;
+    }
+
+    .name-author {
+        background-color: #2a2a2a;
+    }
+
+    .link-repo a {
+        background-color: #444;
+        color: #fff;    
+    }
 }
