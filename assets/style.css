@@ -158,3 +158,9 @@ flex-direction: column;
     background-color: #DDE;
     transition: .1s linear;
 }
+
+#results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

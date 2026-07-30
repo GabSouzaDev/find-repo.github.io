@@ -1,51 +1,67 @@
 let formRequest = document.querySelector("#form-request")
 let fieldFormRequest = document.querySelector("#consulta-api")
 let buttonFormRequest = document.querySelector("#busca-api")
-let card = document.querySelector("#card")
-
-let authorName = document.querySelector("#name-author")
-let authorPhoto = document.querySelector("#photo-author")
-let repoName = document.querySelector("#repo-name")
-let repoDesc = document.querySelector("#repo-description")
-let repoStars = document.querySelector("#repo-stars")
-let repoLink = document.querySelector("#repo-link")
-let repoLanguage = document.querySelector("#repo-language")
 let alertMessage = document.querySelector("#show-message") 
+let results = document.querySelector("#results")
+// let card = document.querySelector("#card")
+// let authorName = document.querySelector("#name-author")
+// let authorPhoto = document.querySelector("#photo-author")
+// let repoName = document.querySelector("#repo-name")
+// let repoDesc = document.querySelector("#repo-description")
+// let repoStars = document.querySelector("#repo-stars")
+// let repoLink = document.querySelector("#repo-link")
+// let repoLanguage = document.querySelector("#repo-language")
+
 
 async function sendRequest(text) {
     let sanitizedText = text.trim()
     clearInput()
-    console.log(sanitizedText)
+
+    alertMessage.classList.remove("hide")
     alertMessage.textContent = "Buscando repositórios..."
+    results.innerHTML = ""
 
     try {
-        let response = await fetch(`https://api.github.com/search/repositories?q=${sanitizedText}&sort=stars&per_page=1`)
+        let response = await fetch(`https://api.github.com/search/repositories?q=${sanitizedText}&sort=stars&per_page=10`)
         let data = await response.json()
+
+        if(!response.ok) {
+            throw new Error("Erro na API")
+        }
+        if(!data.items || data.items.length === 0) {
+            alertMessage.textContent = "Nenhum repositório localizado! Tente novamente."
+            return
+        }
 
         if(response.status === 200) {
             alertMessage.classList.add("hide")
-            if(data.items[0].name) {
-                //happy path
-                document.querySelector("#card").classList.remove("hide")
-                authorName.textContent = data.items[0].owner.login
-                authorPhoto.setAttribute("src", data.items[0].owner.avatar_url)
-                repoName.textContent = data.items[0].name
-                if(data.items[0].description) {
-                    repoDesc.textContent = data.items[0].description
-                } else {
-                    repoDesc.textContent = "Sem descrição neste repositório"
-                }
-                
-                repoLanguage.innerHTML = `Projeto feito com <strong>${data.items[0].language}</strong>`
-                repoStars.textContent = `${data.items[0].stargazers_count} ⭐`
-                repoLink.setAttribute("href", data.items[0].html_url)
-            }
-            else {
-                alertMessage.textContent = "Nenhum repositório encontrado! Tente novamente."  
-            }
-        }
-        else {
-            throw new Error();
+            //loop dos 10 maiores repositórios
+            data.items.forEach((repo) => {
+                let card = document.createElement("div") //cria o elemento card.
+                card.className = "card" //card recebe as devidas estilizações.
+
+                card.innerHTML = 
+                    `
+                        <div class="author-section">
+                            <div class="name-author" id="name-author">${repo.owner.login}</div>
+                            <div class="photo-author" >
+                                <img src="${repo.owner.avatar_url}" alt="${repo.owner.login}" id="photo-author">
+                            </div>
+                        </div>
+                        
+                        <div class="repo-section">
+                            <div class="repo-name" id="repo-name">${repo.name}</div>
+                            <div class="description-repo" id="repo-description">${repo.description || "Sem descrição neste repositório"}</div>
+                            <div class="language-repo" id="repo-language">${repo.language || "N/A"}</div>
+                            <div class="stars-repo" id="repo-stars">${repo.stargazers_count} ⭐</div>
+                            <div class="link-repo">
+                                <a href="${repo.html_url}" target="_blank"  id="repo-link">Acessar repositório</a>
+                            </div>
+                        </div>
+                    ` //insere os elementos do card.
+                    results.appendChild(card) //renderizar na tela.
+
+            })
         }
     } catch (error) {
         alertMessage.textContent = `Ocorreu um erro inesperado...`
