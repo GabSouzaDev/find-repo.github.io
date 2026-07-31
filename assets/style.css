@@ -5,9 +5,44 @@
 }
 
 :root {
-    color-scheme: light dark;
+    color-scheme: light;
+    --page-bg: #ccc;
+    --section-bg: #eeeeee89;
+    --card-bg: #fff;
+    --author-bg: #f5f5f5;
+
+    --input-bg: #fff;
+    --button-bg: #eee;
+    --button-hover: #ddeeff;
+
+    --text-primary: #111;
+    --text-secondary: #555;
+    --border-color: #ddd;
+
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        --page-bg: #0f1115;
+        --section-bg: #181b21;
+        --card-bg: #22262d;
+        --author-bg: #1b1f25;
+
+        --input-bg: #252a32;
+        --button-bg: #2563eb;
+        --button-hover: #1d4ed8;
+
+        --text-primary: #f4f4f5;
+        --text-secondary: #a9b0bb;
+        --border-color: #343a45;
+
+        --accent-color: #60a5fa;
+        --accent-hover: #93c5fd;
+    }
+}
 
 .hide {
     visibility: hidden;
@@ -170,22 +205,3 @@ flex-direction: column;
     gap: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #222;
-        color: #eee;
-    }
-    .card,
-    .repo-section {
-        background-color: #333;
-    }
-
-    .name-author {
-        background-color: #2a2a2a;
-    }
-
-    .link-repo a {
-        background-color: #444;
-        color: #fff;    
-    }
-}
