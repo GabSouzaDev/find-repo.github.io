@@ -39,9 +39,9 @@ async function sendRequest(text) {
                 card.innerHTML = 
                     `
                         <div class="author-section">
-                            <div class="name-author" id="name-author">${repo.owner.login}</div>
+                            <div class="name-author" id="name-author">${repo.owner.login || 'Autor desconhecido'}</div>
                             <div class="photo-author" >
-                                <img src="${repo.owner.avatar_url}" alt="${repo.owner.login}" id="photo-author">
+                                <img src="${repo.owner.avatar_url || 'https://github.com/identicons/1.png'}" alt="${repo.owner.login}" id="photo-author">
                             </div>
                         </div>
                         
